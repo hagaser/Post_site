@@ -5,10 +5,9 @@ const ShowInput = () => {
   const [input_value, Change_Value] = useState('Текст');
 
   const NumberCheck = (value) =>{
-    if (!isNaN(value) && (value)) {
-      return 0;
-    }
-      else return value;
+    if ((!isNaN(value)) && 
+        (value)) return 0;
+    else return value;
     }
 
   return (

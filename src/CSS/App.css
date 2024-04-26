@@ -1,0 +1,20 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.post {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); /* centers the element */
+
+  display: inline-block;
+  width: 70%;
+  padding: 15px;
+  border: 2px solid black;
+}
+
+.post_del {
+    text-align: right;
+}
