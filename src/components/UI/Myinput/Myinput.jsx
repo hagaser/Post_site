@@ -1,9 +1,10 @@
 import React from "react";
+import classes from './Myinput.module.css';
 
-const Mybutton = (props) => {
+const Myinput = (props) => {
   return (
-    <input/>
+    <input className={classes.myInput} {...props}/>
   );
 };
 
-export default Mybutton
+export default Myinput
