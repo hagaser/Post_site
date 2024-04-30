@@ -1,8 +1,16 @@
-import React from "react";
+import React, {useRef} from "react";
+import Mybutton from "./UI/Mybutton/Mybutton";
 
 const PostItem = (props) => {
+
+  const Ref = useRef()
+
+  const deletePost = () => {
+    Ref.current.remove();
+  }
+
   return (
-  <div className="post">
+  <div className="post" ref={Ref}>
     <div className="post__content">
       <h1>{props.post.title}</h1>
       <div>
@@ -10,7 +18,7 @@ const PostItem = (props) => {
       </div>
     </div>
     <div className="post_del">
-      <button>Удалить</button>
+      <Mybutton onClick = {deletePost} >Удалить</Mybutton>
     </div>
   </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./CSS/App.css";
 import PostList from "./components/PostList";
-import CreatePost from "./components/CreatePost";
+import PostForm from "./components/PostForm";
 
 function App() {
 
@@ -18,8 +18,7 @@ function App() {
   return (
     <div className="App">
 
-      <CreatePost create = {createNewPost}/>
-
+      <PostForm create = {createNewPost}/>
       <PostList posts={posts} title="Title name"/>
 
     </div>
