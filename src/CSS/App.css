@@ -12,9 +12,14 @@
   display: inline-block;
   width: 70%;
   padding: 15px;
+  margin-top: 10px;
   border: 2px solid black;
 }
 
 .post_del {
     text-align: right;
+}
+
+.title {
+  text-align: center;
 }
