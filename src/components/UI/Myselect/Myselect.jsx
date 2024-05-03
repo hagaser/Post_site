@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from './Myselect.module.css';
 
 const Myselect = (props) => {
 
+  const [selectedOption, setSelectedOption] = useState(props.defaultValue);
+
+  const sortPost = (e) => {
+    let val = e.target.value;
+    setSelectedOption(val);
+    props.onChange(val);
+  }
+
   return (
     <div>
-      <select value = {props.value} className = {classes.mySelect} onChange = {e => props.onChange(e.target.value)}>
+      <select value={selectedOption} className={classes.mySelect} onChange={sortPost}>
         { props.defaultValue
           ? <option disabled>{props.defaultValue}</option>
           : null

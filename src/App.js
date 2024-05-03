@@ -8,7 +8,6 @@ import Myinput from "./components/UI/Myinput/Myinput";
 function App() {
 
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedSort, setselectedSort] = useState('')
 
   const [posts, setPosts] = useState([
     {id: 1, title: "cЭто имя", content: "aмного текста"},
@@ -24,11 +23,10 @@ function App() {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
-  function sortPosts() {
-    console.log(selectedSort)
-    if(selectedSort) return [...posts].sort((fe, se) => fe[selectedSort].localeCompare(se[selectedSort]))
-    return posts
+  const sortPost = (sortBy) => {
+    setPosts([...posts].sort((fe, se) => fe[sortBy].localeCompare(se[sortBy])))
   }
+
 
   return (
     <div className="App">
@@ -41,8 +39,7 @@ function App() {
           placeholder = "search..."
         />
         <Myselect
-          value = {selectedSort}
-          onChange = {sort => setselectedSort(sort)}
+          onChange = {sortPost}
           defaultValue = "Sort By"
           options = {[
             {value: "title", name: "Title"},
@@ -50,7 +47,7 @@ function App() {
           ]}
         />
       </div>
-      <PostList removePost = {removePost} posts={sortPosts()} title="Title name"/>
+      <PostList removePost = {removePost} posts={posts} title="Title name"/>
 
     </div>
   );
