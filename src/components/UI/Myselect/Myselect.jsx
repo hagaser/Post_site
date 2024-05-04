@@ -5,7 +5,7 @@ const Myselect = (props) => {
 
   const [selectedOption, setSelectedOption] = useState(props.defaultValue);
 
-  const sortPost = (e) => {
+  const setOption = (e) => {
     let val = e.target.value;
     setSelectedOption(val);
     props.onChange(val);
@@ -13,7 +13,7 @@ const Myselect = (props) => {
 
   return (
     <div>
-      <select value={selectedOption} className={classes.mySelect} onChange={sortPost}>
+      <select value={selectedOption} className={classes.mySelect} onChange={setOption}>
         { props.defaultValue
           ? <option disabled>{props.defaultValue}</option>
           : null
