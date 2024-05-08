@@ -9,11 +9,13 @@
   left: 50%;
   transform: translateX(-50%); /* centers the element */
 
-  display: inline-block;
+  display: block;
   width: 70%;
   padding: 15px;
   margin-top: 10px;
   border: 2px solid black;
+  overflow: hidden;
+  max-height: 150px;
 }
 
 .post_del {
@@ -23,3 +25,31 @@
 .title {
   text-align: center;
 }
+
+.post-enter {
+  width: 1px;
+  height: 1px;
+  padding: 0px;
+}
+
+.post-enter-active {
+  width: 70%;
+  height: 140px;
+  padding: 15px;
+  transition: width 250ms ease-in,
+              height 250ms ease-in 250ms,
+              padding 500ms ease-in;
+}
+
+.post-exit {
+  height: 150px;
+}
+
+.post-exit-active {
+  width: 0px;
+  padding: 0px;
+  height: 0px;
+  transition: width 250ms ease-in, 
+              height 250ms ease-in 250ms;
+}
+

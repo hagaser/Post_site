@@ -50,7 +50,7 @@ function App() {
       <PostList
         removePost = {removePost}
         posts={sortAndFiltrPosts()}
-        title="Title name"
+        title="Title"
       />
       <Mymodal displayModal = {displayModal} setdisplayModal = {setdisplayModal}>
         <PostForm create = {createNewPost}/>
