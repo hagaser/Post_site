@@ -5,18 +5,20 @@ import PostForm from "./components/PostForm";
 import Filter from "./components/Filter";
 import Mymodal from "./components/UI/Mymodal/Mymodal";
 import Mybutton from "./components/UI/Mybutton/Mybutton";
+import { usePosts } from "./hooks/usePosts";
 
 function App() {
 
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState('')
   const [displayModal, setdisplayModal] = useState(false)
-
   const [posts, setPosts] = useState([
     {id: 1, title: "cЭто имя", content: "aмного текста"},
     {id: 2, title: "bЭто имя2", content: "bмного текста"},
     {id: 3, title: "aЭто имя1", content: "cмного текста"},
   ])
+
+  const sortAndFiltrPosts = usePosts(posts, searchQuery, sortBy)
 
   const createNewPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -26,30 +28,17 @@ function App() {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
-  const sortPost = (sortByThis) => {
-    setSortBy(sortByThis)
-    setPosts([...posts].sort((fe, se) =>
-      fe[sortByThis].localeCompare(se[sortByThis])))
-  }
-
-  const sortAndFiltrPosts = () => {
-    if (searchQuery && sortBy) return posts.filter(p =>
-      p[sortBy].toLowerCase().includes(searchQuery.toLowerCase()))
-
-    return posts
-  }
-
   return (
     <div className="App">
       <Mybutton onClick = {() => setdisplayModal(true)} >Create Post</Mybutton>
       <Filter 
         searchQuery = {searchQuery}
         setSearchQuery = {setSearchQuery}
-        sortPost = {sortPost}
+        setSortBy = {setSortBy}
       />
       <PostList
         removePost = {removePost}
-        posts={sortAndFiltrPosts()}
+        posts={sortAndFiltrPosts}
         title="Title"
       />
       <Mymodal displayModal = {displayModal} setdisplayModal = {setdisplayModal}>

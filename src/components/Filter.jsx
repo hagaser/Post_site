@@ -2,7 +2,7 @@ import React from "react";
 import Myselect from "./UI/Myselect/Myselect";
 import Myinput from "./UI/Myinput/Myinput";
 
-const Filter = ({setSearchQuery, searchQuery, sortPost}) => {
+const Filter = ({setSearchQuery, searchQuery, setSortBy}) => {
   return (
     <div>
         <Myinput
@@ -11,7 +11,7 @@ const Filter = ({setSearchQuery, searchQuery, sortPost}) => {
           placeholder = "search..."
         />
         <Myselect
-          onChange = {sortPost}
+          onChange = {setSortBy}
           defaultValue = "Sort and Search By"
           options = {[
             {value: "title", name: "Title"},
