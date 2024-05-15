@@ -13,7 +13,7 @@ const PostList = (props) => {
         {props.posts.map(post =>
           <CSSTransition
             key={post.id}
-            timeout={500}
+            timeout={1000}
             classNames="post"
           >
             <PostItem removePost = {props.removePost} post={post} key={post.id}/>
