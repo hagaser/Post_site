@@ -15,7 +15,7 @@ const PostItem = (props) => {
     <div className="post__content">
       <h1>{props.post.title}</h1>
       <div>
-        <p>{props.post.content}</p>
+        <p>{props.post.body}</p>
       </div>
     </div>
     <div className="post_del">

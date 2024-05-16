@@ -15,7 +15,7 @@ const Filter = ({setSearchQuery, searchQuery, setSortBy}) => {
           defaultValue = "Sort and Search By"
           options = {[
             {value: "title", name: "Title"},
-            {value: "content", name: "Content"},
+            {value: "body", name: "Body"},
           ]}
         />
     </div>
