@@ -16,13 +16,21 @@ function App() {
   const [sortBy, setSortBy] = useState('')
   const [displayModal, setdisplayModal] = useState(false)
   const [posts, setPosts] = useState([])
-
+  const [limit, setLimit] = useState(10)
+  const [page, setPage] = useState(1)
+  const [pageArray, setPageArray] = useState([])
 
   const sortAndFiltrPosts = usePosts(posts, searchQuery, sortBy)
 
   const [getPostsData, isLoading, err] = useFetching( async () => {
-    const posts = await PostService.getAll();
-    setPosts(posts)
+    const response = await PostService.getAll(limit, page);
+    setPosts(response.data)
+    let numberOfPages = Math.ceil(response.headers["x-total-count"] / limit) + 1
+    let pageArr = []
+    for (let i = 1; i<numberOfPages; i++) {
+      pageArr.push(i)
+    }
+    setPageArray(pageArr)
   })
 
   const createNewPost = (newPost) => {
@@ -33,9 +41,9 @@ function App() {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
-  useEffect( () =>{
+  useEffect( () => {
     getPostsData()
-  }, [])
+  }, [page])
 
   return (
     <div className="App">
@@ -57,6 +65,16 @@ function App() {
             title="Title"
           />
       }
+      <div>
+        <Mybutton onClick = {() => setPage(page - 1)} >&lt;</Mybutton>
+        {pageArray.map(p =>
+          <Mybutton 
+            onClick = {() => setPage(p)} 
+            key = {p}
+          >{p}</Mybutton>
+        )}
+        <Mybutton onClick = {() => setPage(page + 1)} >&gt;</Mybutton>
+      </div>
       <Mymodal displayModal = {displayModal} setdisplayModal = {setdisplayModal}>
         <PostForm create = {createNewPost}/>
       </Mymodal>
