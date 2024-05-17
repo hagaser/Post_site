@@ -9,6 +9,10 @@ import { usePosts } from "./hooks/usePosts";
 import PostService from "./API/PostService";
 import Loader from "./components/UI/Loader/Loadet";
 import { useFetching } from "./hooks/useFatching";
+import { getNumberOfPages } from "./utils/getNumberOfPages";
+import { usePage } from "./hooks/usePage";
+import { useSetPages } from "./hooks/useSetPages";
+import Pagination from "./components/UI/Pagination/Pagination";
 
 function App() {
 
@@ -16,21 +20,21 @@ function App() {
   const [sortBy, setSortBy] = useState('')
   const [displayModal, setdisplayModal] = useState(false)
   const [posts, setPosts] = useState([])
-  const [limit, setLimit] = useState(10)
   const [page, setPage] = useState(1)
-  const [pageArray, setPageArray] = useState([])
+  const [numberOfPages, setNumberOfPages] = useState(0)
 
   const sortAndFiltrPosts = usePosts(posts, searchQuery, sortBy)
 
+  const pageArray = usePage(numberOfPages)
+
+  const pages = useSetPages(pageArray, page, setPage)
+
   const [getPostsData, isLoading, err] = useFetching( async () => {
+    const limit = 10;
     const response = await PostService.getAll(limit, page);
     setPosts(response.data)
-    let numberOfPages = Math.ceil(response.headers["x-total-count"] / limit) + 1
-    let pageArr = []
-    for (let i = 1; i<numberOfPages; i++) {
-      pageArr.push(i)
-    }
-    setPageArray(pageArr)
+    const totalCount = response.headers["x-total-count"];
+    setNumberOfPages(getNumberOfPages(totalCount, limit))
   })
 
   const createNewPost = (newPost) => {
@@ -58,23 +62,18 @@ function App() {
       }
       {isLoading
         ? <Loader/>
-        :
-          <PostList
+        : <PostList
             removePost = {removePost}
             posts={sortAndFiltrPosts}
             title="Title"
           />
       }
-      <div>
-        <Mybutton onClick = {() => setPage(page - 1)} >&lt;</Mybutton>
-        {pageArray.map(p =>
-          <Mybutton 
-            onClick = {() => setPage(p)} 
-            key = {p}
-          >{p}</Mybutton>
-        )}
-        <Mybutton onClick = {() => setPage(page + 1)} >&gt;</Mybutton>
-      </div>
+      <Pagination
+        page = {page}
+        setPage = {setPage}
+        pages = {pages}
+        pageArray = {pageArray}
+      />
       <Mymodal displayModal = {displayModal} setdisplayModal = {setdisplayModal}>
         <PostForm create = {createNewPost}/>
       </Mymodal>
