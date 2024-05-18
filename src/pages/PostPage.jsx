@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFetching } from "../hooks/useFatching";
 import PostService from "../API/PostService";
-import Loader from "../components/UI/Loader/Loadet";
+import Loader from "../components/UI/Loader/Loader";
 import CommentList from "../components/UI/CommentList/CommentList";
 import PostByID from "../components/UI/PostByID/PostByID";
 

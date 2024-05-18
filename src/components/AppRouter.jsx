@@ -1,25 +1,44 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import About from "../pages/About";
 import Posts from "../pages/Posts";
 import ErrorPage from "../pages/ErrorPage";
 import PostPage from "../pages/PostPage";
+import Login from "../pages/Login";
+import { AuthContext } from "../context";
+import Loader from "./UI/Loader/Loader";
 
 const AppRouter = () => {
+
+  const {isAuth, authLoading} = useContext(AuthContext)
+
+  if (authLoading) {
+    return <Loader/>
+  }
   
-  const routes = [
-    {id: 1, path: "/about", element: <About/>},
-    {id: 3, path: "*", element: <ErrorPage/>},
+  const privateRoutes = [
+    {id: 1, path: "/about", element: <About/>, exact: false},
+    {id: 2, path: "/posts", element: <Posts/>, exact: true},
+    {id: 3, path: "*", element: <ErrorPage/>, exact: false},
+    {id: 4, path: "/posts/:id", element: <PostPage/>, exact: true},
+  ]
+
+  const pablicRoutes = [
+    {id: 5, path: "*", element: <Login/>, exact: false},
   ]
 
   return (
-    <Routes>
-      {routes.map(route => 
-        <Route path = {route.path} key = {route.id} element = {route.element}/>
-      )}
-      <Route exact path = "/posts" key = {2} element = {<Posts/>}/>
-      <Route exact path = "/posts/:id" key = {4} element = {<PostPage/>}/>
-    </Routes>
+    isAuth
+    ? <Routes>
+        {privateRoutes.map(route => 
+          <Route path = {route.path} key = {route.id} element = {route.element}/>
+        )}
+      </Routes>
+    : <Routes>
+        {pablicRoutes.map(route => 
+          <Route path = {route.path} key = {route.id} element = {route.element}/>
+        )}
+      </Routes>
   );
 };
 

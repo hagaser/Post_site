@@ -7,7 +7,7 @@ import Mymodal from "../components/UI/Mymodal/Mymodal";
 import Mybutton from "../components/UI/Mybutton/Mybutton";
 import { usePosts } from "../hooks/usePosts";
 import PostService from "../API/PostService";
-import Loader from "../components/UI/Loader/Loadet";
+import Loader from "../components/UI/Loader/Loader";
 import { useFetching } from "../hooks/useFatching";
 import { getNumberOfPages } from "../utils/getNumberOfPages";
 import { usePage } from "../hooks/usePage";
