@@ -1,0 +1,17 @@
+.nav__link {
+  text-decoration: none;
+  color: #999999;
+  background-color: #333333;
+  border: 1px solid #666666;
+  padding: 3px;
+  margin: 0px 5px;
+}
+
+.navmenu__links {
+  margin-left: auto;
+}
+
+.navmenu {
+  background-color: #333333;
+  padding: 10px;
+}
