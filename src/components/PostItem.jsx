@@ -1,7 +1,10 @@
 import React, { useRef } from "react";
 import Mybutton from "./UI/Mybutton/Mybutton";
+import { useNavigate } from "react-router-dom";
 
 const PostItem = (props) => {
+
+  const router = useNavigate()
 
   const postRef = useRef();
 
@@ -20,6 +23,7 @@ const PostItem = (props) => {
     </div>
     <div className="post_del">
       <Mybutton onClick = {deletePost} >Удалить</Mybutton>
+      <Mybutton onClick = {() => router(`/posts/${props.post.id}`)}>Открыть пост</Mybutton>
     </div>
   </div>
   );

@@ -1,0 +1,10 @@
+.comment__list {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  width: 70%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
