@@ -1,9 +1,13 @@
 import { useMemo } from "react"
 import Mybutton from "../components/UI/Mybutton/Mybutton";
+import { getDisplayedArray } from "../utils/getDisplayedArray";
 
 export const useSetPages = (pageArray, page, setPage) => {
   const Pages = useMemo( () => {
-    return pageArray.map(p => {
+
+    const displayedArray = getDisplayedArray(pageArray, page)
+
+    return displayedArray.map(p => {
         if (page != p) {
           return (
             <Mybutton 

@@ -51,15 +51,19 @@ function App() {
 
   return (
     <div className="App">
+
       <Mybutton onClick = {() => setdisplayModal(true)} >Create Post</Mybutton>
+
       <Filter 
         searchQuery = {searchQuery}
         setSearchQuery = {setSearchQuery}
         setSortBy = {setSortBy}
       />
+
       {err &&
         <h1>Error: {err}</h1>
       }
+
       {isLoading
         ? <Loader/>
         : <PostList
@@ -68,12 +72,14 @@ function App() {
             title="Title"
           />
       }
+
       <Pagination
         page = {page}
         setPage = {setPage}
         pages = {pages}
         pageArray = {pageArray}
       />
+      
       <Mymodal displayModal = {displayModal} setdisplayModal = {setdisplayModal}>
         <PostForm create = {createNewPost}/>
       </Mymodal>
