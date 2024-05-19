@@ -1,5 +1,10 @@
 .mySelect {
+
+  /* block-model */
   margin: 5px;
-  border: solid #000000 1px;
   width: 140px;
+
+  /* decoration */
+  border: solid #000000 1px;
+
 }

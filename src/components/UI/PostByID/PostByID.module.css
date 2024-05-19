@@ -1,22 +1,22 @@
 .post__head {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   margin-top: 10px;
-  width: 70%;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .post__body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin-top: 100px;
-  width: 70%;
+}
+
+.post__div {
+
+  /* posititon */
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+
+  /* block-model */
+  width: 70%;
+
+  /* typography */
+  text-align: center;
+
 }

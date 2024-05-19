@@ -1,13 +1,25 @@
 .nav__link {
-  text-decoration: none;
-  color: #999999;
-  background-color: #333333;
-  border: 1px solid #666666;
+
+  /* block-model */
   padding: 3px;
   margin: 0px 5px;
+
+  /* typography */
+  text-decoration: none;
+  color: #999999;
+
+  /* decoration */
+  background-color: #333333;
+  border: 1px solid #666666;
+  
 }
 
 .navmenu {
-  background-color: #333333;
+
+  /* block-model */
   padding: 10px;
+
+  /* decoration */
+  background-color: #333333;
+
 }

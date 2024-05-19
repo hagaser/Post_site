@@ -1,0 +1,24 @@
+.post {
+
+  /* position */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); /* centers the element */
+
+  /* block-model */
+  display: block;
+  width: 70%;
+  padding: 15px;
+  margin-top: 10px;
+
+  /* decoration */
+  border: 2px solid black;
+
+  /* other */
+  overflow: hidden;
+
+}
+
+.post_del {
+  text-align: right;
+}

@@ -1,35 +1,46 @@
 import React, { useEffect, useState } from "react";
+
+// react-router-dom //
 import { useParams } from "react-router-dom";
-import { useFetching } from "../hooks/useFatching";
+
+// castom hook //
+import { useFetching } from "../hooks/useFetching";
+
+// API //
 import PostService from "../API/PostService";
+
+// components //
 import Loader from "../components/UI/Loader/Loader";
 import CommentList from "../components/UI/CommentList/CommentList";
 import PostByID from "../components/UI/PostByID/PostByID";
 
+
 const PostPage = () => {
 
-  const [post, setPost] = useState([])
-  const [comments, setComments] = useState([])
+  // useState //
+  const [post, setPost] = useState([]);
+  const [comments, setComments] = useState([]);
 
-  const params = useParams()
+  const params = useParams();
 
   const [getPost, isLoading, err] = useFetching ( async () => {
-    const response = await PostService.getByID(params.id)
-    setPost(response.data)
+    const response = await PostService.getPostByID(params.id); // get current post
+    setPost(response.data);
   })
 
   const [getComments, isCommentsLoading, comentErr] = useFetching ( async () => {
-    const response = await PostService.getCommentsByID(params.id)
-    setComments(response.data)
+    const response = await PostService.getCommentsByID(params.id); // get current post comments
+    setComments(response.data);
   })
 
   useEffect ( () => {
-    getPost()
-    getComments()
+    getPost();
+    getComments();
   }, [])
 
   return (
     <div>
+
       {err &&
         <h1>Error: {err}</h1>
       }
@@ -51,6 +62,7 @@ const PostPage = () => {
             comments = {comments}
           />
       }
+      
     </div>
   );
 };

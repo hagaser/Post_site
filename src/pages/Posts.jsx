@@ -1,106 +1,115 @@
 import React, { useEffect, useRef, useState } from "react";
+
+// styles //
 import "../CSS/App.css";
-import PostList from "../components/PostList";
+
+// components //
+import PostList from "../components/UI/PostList/PostList";
 import PostForm from "../components/PostForm";
 import Filter from "../components/Filter";
-import Mymodal from "../components/UI/Mymodal/Mymodal";
-import Mybutton from "../components/UI/Mybutton/Mybutton";
-import { usePosts } from "../hooks/usePosts";
-import PostService from "../API/PostService";
+import MyModal from "../components/UI/MyModal/MyModal";
+import MyButton from "../components/UI/MyButton/MyButton";
 import Loader from "../components/UI/Loader/Loader";
-import { useFetching } from "../hooks/useFatching";
+import Pagination from "../components/UI/Pagination/Pagination";
+
+// API //
+import PostService from "../API/PostService";
+
+// utils //
 import { getNumberOfPages } from "../utils/getNumberOfPages";
+
+// custom hooks //
+import { usePosts } from "../hooks/usePosts";
+import { useFetching } from "../hooks/useFetching";
 import { usePage } from "../hooks/usePage";
 import { useSetPages } from "../hooks/useSetPages";
-import Pagination from "../components/UI/Pagination/Pagination";
 import { useObserver } from "../hooks/useObserver";
-import Myselect from "../components/UI/Myselect/Myselect";
+import ChooseDisplay from "../components/ChooseDisplay";
+
 
 function Posts() {
 
-  const [searchQuery, setSearchQuery] = useState('')
-  const [sortBy, setSortBy] = useState('')
-  const [displayModal, setdisplayModal] = useState(false)
-  const [posts, setPosts] = useState([])
-  const [page, setPage] = useState(0)
-  const [limit, setLimit] = useState(10)
-  const [numberOfPages, setNumberOfPages] = useState(0)
-  const [displayMethod, setDisplayMethod] = useState("by buttons")
+  // useState
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("");
+  const [displayModal, setdisplayModal] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [numberOfPages, setNumberOfPages] = useState(0);
+  const [displayMethod, setDisplayMethod] = useState("by buttons");
 
-  const lastEllement = useRef()
+  // useRef
+  const lastEllement = useRef();
 
-  const sortAndFiltrPosts = usePosts(posts, searchQuery, sortBy)
+  // castom hooks
+  const sortAndFiltrPosts = usePosts(posts, searchQuery, sortBy);
 
-  const pageArray = usePage(numberOfPages)
+  const pageArray = usePage(numberOfPages);
 
-  const pages = useSetPages(pageArray, page, setPage)
+  const pages = useSetPages(pageArray, page, setPage);
 
   const [getPostsData, isPostsLoading, err] = useFetching( async () => {
-    const response = await PostService.getAll(limit, page);
+    
+    const response = await PostService.getAllPosts(limit, page);
 
     if (displayMethod == "by buttons") {
-      setPosts(response.data)
+      if (observer) observer.disconnect();
+      setPosts(response.data);
     }
     
     if (displayMethod == "endless feed") {
-      setPosts([...posts, ...response.data])
+      setPosts([...posts, ...response.data]);
     }
 
     const totalCount = response.headers["x-total-count"];
-    setNumberOfPages(getNumberOfPages(totalCount, limit))
+    setNumberOfPages(getNumberOfPages(totalCount, limit));
+
+    if (page > numberOfPages && numberOfPages) setPage(numberOfPages)
   })
 
   let run = false;
   if (displayMethod == "endless feed") run = true;
+  if (displayMethod == "by buttons") run = false;
 
-  useObserver(run, isPostsLoading, lastEllement, page < numberOfPages, () => {
-    setPage(page + 1);
-  })
+  const observer = (useObserver(
+    run,
+    isPostsLoading,
+    lastEllement,
+    page < numberOfPages, 
+    () => {
+      setPage(page + 1);
+    }));
 
   useEffect( () => {
-    getPostsData()
-  }, [page, limit])
+    getPostsData();
+  }, [page, limit, displayMethod, numberOfPages]);
 
   const createNewPost = (newPost) => {
-    setPosts([...posts, newPost])
+    setPosts([...posts, newPost]);
   }
 
   const removePost = (post) => {
-    setPosts(posts.filter(p => p.id !== post.id))
+    setPosts(posts.filter(p => p.id !== post.id));
   }
 
   return (
     <div className="App">
 
-      <Mybutton onClick = {() => setdisplayModal(true)} >Create Post</Mybutton>
+      <MyButton onClick = {() => setdisplayModal(true)} >
+        Create Post
+      </MyButton>
 
       <Filter 
         searchQuery = {searchQuery}
         setSearchQuery = {setSearchQuery}
         setSortBy = {setSortBy}
       />
-      {displayMethod == "by buttons" &&
-        <Myselect
-          value = {limit}
-          onChange = {value => setLimit(value)}
-          defaultValue = "Number of ellements on page"
-          options = {[
-            {value: 5, name: "5"},
-            {value: 10, name: "10"},
-            {value: 25, name: "25"},
-            {value: -1, name: "Show all"},
-          ]}
-        />
-      }
 
-      <Myselect
-        value = {displayMethod}
-        onChange = {value => setDisplayMethod(value)}
-        defaultValue = "Display method"
-        options = {[
-          {value: "endless feed", name: "Endless feed"},
-          {value: "by buttons", name: "By buttons"},
-        ]}
+      <ChooseDisplay
+        displayMethod = {displayMethod}
+        setLimit = {setLimit}
+        setDisplayMethod = {setDisplayMethod}
       />
 
       {err &&
@@ -118,7 +127,7 @@ function Posts() {
       />
       <div ref={lastEllement}/>
 
-      {displayMethod == 'by buttons' &&
+      {displayMethod == "by buttons" &&
         <Pagination
           page = {page}
           setPage = {setPage}
@@ -127,9 +136,12 @@ function Posts() {
         />
       }
       
-      <Mymodal displayModal = {displayModal} setdisplayModal = {setdisplayModal}>
+      <MyModal
+        displayModal = {displayModal}
+        setdisplayModal = {setdisplayModal}
+      >
         <PostForm create = {createNewPost}/>
-      </Mymodal>
+      </MyModal>
 
     </div>
   );

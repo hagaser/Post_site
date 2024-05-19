@@ -1,5 +1,9 @@
 .error {
+
+  /* bloack-model */
   display: flex;
+
+  /* other */
   justify-content: center;
-  align-items: center;
+
 }

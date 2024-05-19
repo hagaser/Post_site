@@ -1,9 +1,17 @@
-.myBtn {
+.myButton {
+
+  /* block-model */
   padding: 5px 15px;
-  color: #000000;
-  font-size: 14px;
-  border: 1px solid #000000;
-  cursor: pointer;
-  background-color: transparent;
   margin: 5px;
+
+  /* typography */
+  font-size: 14px;
+
+  /* decorations */
+  border: 1px solid #000000;
+  background-color: transparent;
+
+  /* other */
+  cursor: pointer;
+
 }

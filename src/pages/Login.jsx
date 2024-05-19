@@ -1,20 +1,13 @@
-import React, { useContext } from "react";
-import Mybutton from "../components/UI/Mybutton/Mybutton";
-import { AuthContext } from "../context";
+import React from "react";
+import LoginModal from "../components/UI/LoginModal/LoginModal";
 
 const Login = () => {
-
-  const {setIsAuth} = useContext(AuthContext)
-
-  const login = () => {
-    setIsAuth(true);
-    localStorage.setItem("auth", "true")
-  }
-
   return (
+
     <div>
-      <Mybutton onClick = {() => login()} >Login</Mybutton>
+      <LoginModal/>
     </div>
+    
   );
 };
 

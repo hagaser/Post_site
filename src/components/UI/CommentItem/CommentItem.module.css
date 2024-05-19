@@ -1,5 +1,10 @@
 .comment {
-    border: 1px solid;
-    margin-top: 5px;
-    padding: 5px;
+
+  /* block-model */
+  margin-top: 5px;
+  padding: 5px;
+
+  /* decoration */
+  border: 1px solid;
+  
 }

@@ -1,22 +1,40 @@
 .myModal {
-  display: none;
+
+  /* position */
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+
+  /* block-model */
+  display: none;
+
+  /* decoration */
   background-color: rgba(0, 0, 0, 50%);
+
 }
 
 .myModalContent {
+
+  /* block-model */
+  padding: 25px;
+  width: 50%;
+
+  /* decoration */
   border: 1px #000000 solid;
   border-radius: 25px;
-  padding: 25px;
   background-color: #ffffff;
+
 }
 
 .active {
+
+  /* block-model */
   display: flex;
+
+  /* other */
   justify-content: center;
   align-items: center;
+  
 }

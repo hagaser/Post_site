@@ -1,32 +1,55 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+
+// classes //
 import classes from "./NavMenu.module.css";
+
+// react-router-dom //
+import { Link } from "react-router-dom";
+
+// context //
 import { AuthContext } from "../../../context";
-import Mybutton from "../Mybutton/Mybutton";
+
+// components //
+import MyButton from "../MyButton/MyButton";
+
 
 const NavMenu = () => {
 
-  const {setIsAuth} = useContext(AuthContext)
+  const {setIsAuth} = useContext(AuthContext); // get func "setIsAuth" from context
 
   const links = [
     {id: 1, to: "/about", name: "About"},
     {id: 2, to: "/posts", name: "Posts"},
-  ]
+  ];
 
   const logaut = () => {
-    setIsAuth(false)
-    localStorage.removeItem("auth")
+    setIsAuth(false);
+    localStorage.removeItem("auth"); // delete "Auth" state from localStorage
   }
 
   return (
+
     <div className = {classes.navmenu}>
-      <div className = {classes.navmenu__links}>
+
         {links.map(link => 
-          <Link to = {link.to} className = {classes.nav__link} key = {link.id}>{link.name}</Link>
+          <Link
+            to = {link.to} 
+            className = {classes.nav__link}
+            key = {link.id}
+          >
+            {link.name}
+          </Link>
         )}
-        <Mybutton className = {classes.nav__link} onClick = { () => logaut()}>Logout</Mybutton>
-      </div>
+
+        <MyButton 
+          className = {classes.nav__link} 
+          onClick = { () => logaut()}
+        >
+          Logout
+        </MyButton>
+
     </div>
+
   );
 };
 

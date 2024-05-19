@@ -1,19 +1,28 @@
 import React from "react";
-import classes from './Mymodal.module.css';
+import classes from "./MyModal.module.css";
 
-const Mymodal = ({children, displayModal, setdisplayModal}) => {
+const MyModal = ({children, displayModal, setdisplayModal}) => {
 
-  const rootClasses = [classes.myModal]
+  const rootClasses = [classes.myModal];
 
-  if (displayModal) rootClasses.push(classes.active)
+  if (displayModal) rootClasses.push(classes.active); // makes the element visible
 
   return (
-    <div className = {rootClasses.join(' ')} onClick={() => setdisplayModal(false)}>
-      <div className={classes.myModalContent} onClick={(e) => e.stopPropagation()}>
+
+    <div 
+      className = {rootClasses.join(" ")}
+      onClick={() => setdisplayModal(false)}
+    >
+      {/* "stopPropagation()" it does not allow hide an element when clicking on the form */}
+      <div 
+        className={classes.myModalContent}
+        onClick={(e) => e.stopPropagation()}
+      >
         {children}
       </div>
     </div>
+
   );
 };
 
-export default Mymodal
+export default MyModal

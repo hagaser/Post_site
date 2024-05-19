@@ -1,16 +1,21 @@
 import React from "react";
-import Myselect from "./UI/Myselect/Myselect";
-import Myinput from "./UI/Myinput/Myinput";
+
+// components //
+import MySelect from "./UI/MySelect/MySelect";
+import MyInput from "./UI/MyInput/MyInput";
 
 const Filter = ({setSearchQuery, searchQuery, setSortBy}) => {
   return (
+
     <div>
-        <Myinput
+
+        <MyInput
           value = {searchQuery}
           onChange = {e => setSearchQuery(e.target.value)}
           placeholder = "search..."
         />
-        <Myselect
+
+        <MySelect
           onChange = {setSortBy}
           defaultValue = "Sort and Search By"
           options = {[
@@ -18,7 +23,9 @@ const Filter = ({setSearchQuery, searchQuery, setSortBy}) => {
             {value: "body", name: "Body"},
           ]}
         />
+
     </div>
+
   );
 };
 
