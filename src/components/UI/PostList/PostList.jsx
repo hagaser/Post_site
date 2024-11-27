@@ -1,14 +1,14 @@
-import React from "react";
+import React, { memo } from "react";
 import PostItem from "../PostItem/PostItem";
 import classes from "./PostList.module.css"
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-const PostList = (props) => {
+const PostList = memo((props) => {
   return (
 
     <div>
 
-      { props.posts.length !== 0
+      { props.posts.length !== 0 || props.isPostsLoading
         ? <h1 className={classes.title}>{props.title}</h1>
         : <h1 className={classes.title}>No Posts found</h1>
       }
@@ -37,6 +37,6 @@ const PostList = (props) => {
     </div>
 
   );
-};
+});
 
 export default PostList

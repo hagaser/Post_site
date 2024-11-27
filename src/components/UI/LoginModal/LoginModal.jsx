@@ -23,9 +23,9 @@ const LoginModal = () => {
   return (
 
     <div className = {classes.login}>
-      <h2>Login:</h2>
+      <p className = {classes.p}>Login:</p>
       <MyInput></MyInput>
-      <h2>Password:</h2>
+      <p className = {classes.p}>Password:</p>
       <MyInput></MyInput>
       <MyButton onClick = {() => login()} >Login</MyButton>
     </div>

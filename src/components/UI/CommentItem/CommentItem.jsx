@@ -5,7 +5,7 @@ const CommentItem = (props) => {
   return (
 
     <div className = {classes.comment}>
-      <h4>{props.comment.email}</h4>
+      <p>{props.comment.email}</p>
       <p>{props.comment.body}</p>
     </div>
     

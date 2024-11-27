@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 
 // react-router-dom //
 import { useParams } from "react-router-dom";
@@ -15,7 +15,7 @@ import CommentList from "../components/UI/CommentList/CommentList";
 import PostByID from "../components/UI/PostByID/PostByID";
 
 
-const PostPage = () => {
+const PostPage = memo(() => {
 
   // useState //
   const [post, setPost] = useState([]);
@@ -65,6 +65,6 @@ const PostPage = () => {
       
     </div>
   );
-};
+});
 
 export default PostPage

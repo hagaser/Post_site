@@ -53,12 +53,12 @@ function Posts() {
     
     const response = await PostService.getAllPosts(limit, page);
 
-    if (displayMethod == "by buttons") {
+    if (displayMethod === "by buttons") {
       if (observer) observer.disconnect();
       setPosts(response.data);
     }
     
-    if (displayMethod == "endless feed") {
+    if (displayMethod === "endless feed") {
       setPosts([...posts, ...response.data]);
     }
 
@@ -66,11 +66,11 @@ function Posts() {
     setNumberOfPages(getNumberOfPages(totalCount, limit));
 
     if (page > numberOfPages && numberOfPages) setPage(numberOfPages)
-  })
+  });
 
   let run = false;
-  if (displayMethod == "endless feed") run = true;
-  if (displayMethod == "by buttons") run = false;
+  if (displayMethod === "endless feed") run = true;
+  if (displayMethod === "by buttons") run = false;
 
   const observer = (useObserver(
     run,
@@ -79,7 +79,8 @@ function Posts() {
     page < numberOfPages, 
     () => {
       setPage(page + 1);
-    }));
+    }
+  ));
 
   useEffect( () => {
     getPostsData();
@@ -121,13 +122,14 @@ function Posts() {
       }
 
       <PostList
+        isPostsLoading = {isPostsLoading}
         removePost = {removePost}
         posts={sortAndFiltrPosts}
         title="Title"
       />
       <div ref={lastEllement}/>
 
-      {displayMethod == "by buttons" &&
+      {displayMethod === "by buttons" &&
         <Pagination
           page = {page}
           setPage = {setPage}

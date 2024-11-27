@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import classes from "./Pagination.module.css";
 import MyButton from "../MyButton/MyButton";
 
-const Pagination = (props) => {
+const Pagination = memo((props) => {
   return (
 
     <div className={classes.page__wraper}>
@@ -14,7 +14,7 @@ const Pagination = (props) => {
 
       {props.pages}
 
-      {props.page == props.pageArray.length // if current page is last
+      {props.page === props.pageArray.length // if current page is last
         ? null
         : <MyButton onClick = {() => props.setPage(props.page + 1)} >&gt;</MyButton> // "&lt;" = ">"
       }
@@ -22,6 +22,6 @@ const Pagination = (props) => {
     </div>
 
   );
-};
+});
 
 export default Pagination

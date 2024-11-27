@@ -13,8 +13,9 @@ export const useObserver = (run, isLoading, ref, canLoad, callback) => {
 
     if (observer.current) observer.current.disconnect();
 
-    let cb = (entries, observer) => {
-      if (entries[0].isIntersecting && canLoad) callback(); // if reaches the bottom of the page and there are more posts
+    const cb = (entries, observer) => {
+      // if reaches the bottom of the page and there are more posts
+      if (entries[0].isIntersecting && canLoad) callback();
     }
 
     observer.current = new IntersectionObserver(cb);
